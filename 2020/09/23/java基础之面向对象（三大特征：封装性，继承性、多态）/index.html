@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java基础之面向对象（三大特征：封装性，继承性、多态） | Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、多态：​    1、理解：一个事物可以有多种形态，例如人，分为男人，女人。 男人，女人都继承了人这个特性。 ​    2、使用的总结：（适用前提：继承关系，重写方法） ​                2.1：编译看左边；运行看右边。编译期时，只能调用父类的已有方法，但是实际在运行时，运行的是我们重写的父类的方法。 ​                2.2：对象的多态只用于方法，不能用于属性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础之面向对象（三大特征：封装性，继承性、多态）">
+<meta property="og:url" content="http://example.com/2020/09/23/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81%EF%BC%9A%E5%B0%81%E8%A3%85%E6%80%A7%EF%BC%8C%E7%BB%A7%E6%89%BF%E6%80%A7%E3%80%81%E5%A4%9A%E6%80%81%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、多态：​    1、理解：一个事物可以有多种形态，例如人，分为男人，女人。 男人，女人都继承了人这个特性。 ​    2、使用的总结：（适用前提：继承关系，重写方法） ​                2.1：编译看左边；运行看右边。编译期时，只能调用父类的已有方法，但是实际在运行时，运行的是我们重写的父类的方法。 ​                2.2：对象的多态只用于方法，不能用于属性。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-23T13:31:03.000Z">
+<meta property="article:modified_time" content="2020-09-24T04:46:49.613Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&fm=26&gp=0.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("your_app_id", "your_app_key");</script>
+
+<script src="/js/Counter.js"></script>
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&amp;fm=26&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">橘子荔枝蜜</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">你好，兄dei</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">橘子荔枝蜜</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&amp;fm=26&amp;gp=0.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">橘子荔枝蜜</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">你好，兄dei</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-java基础之面向对象（三大特征：封装性，继承性、多态）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/23/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81%EF%BC%9A%E5%B0%81%E8%A3%85%E6%80%A7%EF%BC%8C%E7%BB%A7%E6%89%BF%E6%80%A7%E3%80%81%E5%A4%9A%E6%80%81%EF%BC%89/" class="article-date">
+  	<time datetime="2020-09-23T13:31:03.000Z" itemprop="datePublished">2020-09-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java基础之面向对象（三大特征：封装性，继承性、多态）
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2020/09/23/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81%EF%BC%9A%E5%B0%81%E8%A3%85%E6%80%A7%EF%BC%8C%E7%BB%A7%E6%89%BF%E6%80%A7%E3%80%81%E5%A4%9A%E6%80%81%EF%BC%89/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="java基础之面向对象（三大特征：封装性，继承性、多态）">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、多态："><a href="#一、多态：" class="headerlink" title="一、多态："></a>一、多态：</h3><p>​    1、理解：一个事物可以有多种形态，例如人，分为男人，女人。 男人，女人都继承了人这个特性。</p>
+<p>​    2、使用的总结：（适用前提：继承关系，重写方法）</p>
+<p>​                2.1：编译看左边；运行看右边。编译期时，只能调用父类的已有方法，但是实际在运行时，运行的是我们重写的父类的方法。</p>
+<p>​                2.2：对象的多态只用于方法，不能用于属性。</p>
+<p>​                2.3：想用子类的属性和方法时，使用向下转型。因为我们声明的时候是把子类转换成父类，所以我们只能用父类已有的，但是内存中实际已经加载了子类特有的方法和属性。只要我们通过强制转换成原来的类型即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person p = <span class="keyword">new</span> man();<span class="comment">//这里只能用父类的属性、方法</span></span><br><span class="line">man m = (man)p;<span class="comment">//向下转型，可以用子类方法</span></span><br></pre></td></tr></table></figure>
+
+<p>​                2.3.1: ClassCastException的异常，如果我们向下转型的时候，之前声明的子类是man（），但是向下转型时我们转成women（），这是不被允许的，要求向下转型的类型是之前那个类（必须是之前的这个类，这个类的子类也不行）。</p>
+<p>多态的面试题：</p>
+<p>3.1 谈谈你对多态性的理解？<br>① 实现代码的通用性。<br>② Object类中定义的public boolean equals(Object obj){  }<br>  JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)<br>③ 抽象类、接口的使用肯定体现了多态性。（抽象类、接口不能实例化）<br>3.2 多态是编译时行为还是运行时行为？</p>
+<p>​    运行时行为。证明：利用随机数产生不同的对象（这几个类继承同一个父类）,每次随机出来的对象是不一样的，说明运行时才会得到具体是哪个对象。</p>
+<h3 id="二、static关键字（静态的）"><a href="#二、static关键字（静态的）" class="headerlink" title="二、static关键字（静态的）"></a>二、static关键字（静态的）</h3><p>​    static是与类绑定的，早于对象创建。</p>
+<p>1、通常修饰的结构：属性、方法、代码块、内部类</p>
+<p>2、修饰属性时（静态变量）</p>
+<p>​            当我们创建多个同一个类的对象时，多个对象共享一个static变量，如果其中一个对象修改这个static变量，其他对象所获得的值也会改变。</p>
+<p>​            其他说明：</p>
+<p>​            2.1 静态变量随着类的加载。可以通过“类.静态变量”的方法进行调用。</p>
+<p>​            2.2 类只会加载一次，所以静态变量也只会存在一份，存在方法区的静态域中。（方法区包括：类的加载信息，静态域、常量池）</p>
+<p>3、static修饰方法</p>
+<p>​        1 随着类的加载而加载，调用方法：“类.静态方法”的方式调用，不需要创建对象</p>
+<p>​        2 静态方法只能调用静态的。非静态方法既可以调用静态的，也可以调用非静态的。</p>
+<h3 id="三、代码块（一般用于初始化类、对象的信息）"><a href="#三、代码块（一般用于初始化类、对象的信息）" class="headerlink" title="三、代码块（一般用于初始化类、对象的信息）"></a>三、代码块（一般用于初始化类、对象的信息）</h3><p>​    1 静态代码块（static修饰）</p>
+<pre><code>    &gt;内部可以输出语句。
+    &gt;
+    &gt;随着类的加载而加载，只能执行一次，用于初始化类的信息。
+    &gt;
+    &gt;如果一个类定义了多个静态代码块，则按照声明的先后顺序执行。
+    &gt;
+    &gt;静态只能调用静态。</code></pre>
+<p>​    2 非静态代码块</p>
+<blockquote>
+<p>内部可以输出语句。</p>
+<p>随着对象的创建而创建，每创建一个对象就执行一次非静态代码块，可以对对象的属性进行初始化</p>
+<p>如果一个类定义了多个非静态代码块，则按照声明的先后顺序执行。</p>
+<p>非静态可以调用静态和非静态。</p>
+</blockquote>
+<h3 id="四、abstract关键字（抽象的，修饰类，方法）"><a href="#四、abstract关键字（抽象的，修饰类，方法）" class="headerlink" title="四、abstract关键字（抽象的，修饰类，方法）"></a>四、abstract关键字（抽象的，修饰类，方法）</h3><p>​        1、修饰类</p>
+<pre><code>        &gt;此类不能被实例化，必须要有构造器，以供于子类实例化
+        &gt;
+        &gt;一般都会有子类去继承一个抽象类，让子类对象实例化去操作</code></pre>
+<p>​        2、修饰方法        </p>
+<pre><code>    &gt;&gt; 如果修饰方法，只是声明了这个方法，不能有方法体
+    &gt;
+    &gt;&gt; 如果子类重写了父类的所有抽象方法，此子类可以实例化，没有重写所有不可以实例化</code></pre>
+<p>​        3、注意点</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>包含抽象方法的类一定是抽象类，但是抽象类不一定所有都是抽象方法，可以没有抽象方法。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="五、内部类"><a href="#五、内部类" class="headerlink" title="五、内部类"></a>五、内部类</h3><h4 id="1、分类：成员内部类-静态、非静态-，局部内部类（方法内、代码块内、构造器内）"><a href="#1、分类：成员内部类-静态、非静态-，局部内部类（方法内、代码块内、构造器内）" class="headerlink" title="1、分类：成员内部类(静态、非静态)，局部内部类（方法内、代码块内、构造器内）"></a>1、分类：成员内部类(静态、非静态)，局部内部类（方法内、代码块内、构造器内）</h4><h4 id="2、成员内部类："><a href="#2、成员内部类：" class="headerlink" title="2、成员内部类："></a>2、成员内部类：</h4><h5 id="2-1-作为外部类的成员"><a href="#2-1-作为外部类的成员" class="headerlink" title="2.1 作为外部类的成员"></a>2.1 作为外部类的成员</h5><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>可以调用外部类的结构</p>
+<p>可以被static修饰</p>
+<p>可以被4中不同的权限修饰符修饰</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h5 id="2-2-作为一个类"><a href="#2-2-作为一个类" class="headerlink" title="2.2 作为一个类"></a>2.2 作为一个类</h5><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>可以定义属性、方法、构造器等</p>
+<p>可以被继承，final，abstract修饰</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h5 id="2-3-创建成员内部类的对象（静态的、非静态的）"><a href="#2-3-创建成员内部类的对象（静态的、非静态的）" class="headerlink" title="2.3 创建成员内部类的对象（静态的、非静态的）"></a>2.3 创建成员内部类的对象（静态的、非静态的）</h5><blockquote>
+<blockquote>
+<p>创建静态的Dog内部类的实例（静态的成员内部类）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person.Dog dog = <span class="keyword">new</span> Person.Dog();</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>创建非静态的的成员内部类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person p = <span class="keyword">new</span> Person();</span><br><span class="line">Person.Bird brid = p.<span class="function">new <span class="title">Bird</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+</blockquote>
+<h5 id="2-4-调用外部类的结构"><a href="#2-4-调用外部类的结构" class="headerlink" title="2.4 调用外部类的结构"></a>2.4 调用外部类的结构</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	String name = <span class="string">&quot;小明&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非静态成员内部类</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Bird</span></span>&#123;</span><br><span class="line">		String name = <span class="string">&quot;杜鹃&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">			System.out.println(name);<span class="comment">//方法的形参</span></span><br><span class="line">			System.out.println(<span class="keyword">this</span>.name);<span class="comment">//内部类的属性</span></span><br><span class="line">			System.out.println(Person.<span class="keyword">this</span>.name);<span class="comment">//外部类的属性</span></span><br><span class="line">		<span class="comment">//Person.this.eat();</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3、局部内部类"><a href="#3、局部内部类" class="headerlink" title="3、局部内部类"></a>3、局部内部类</h4><p>局部内部类的使用（通常用匿名内部类，即为方式二）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回一个实现了Comparable接口的类的对象</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Comparable <span class="title">getComparable</span><span class="params">()</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建一个实现了Comparable接口的类:局部内部类</span></span><br><span class="line">		<span class="comment">//方式一：</span></span><br><span class="line"><span class="comment">//		class MyComparable implements Comparable&#123;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//			@Override</span></span><br><span class="line"><span class="comment">//			public int compareTo(Object o) &#123;</span></span><br><span class="line"><span class="comment">//				return 0;</span></span><br><span class="line"><span class="comment">//			&#125;</span></span><br><span class="line"><span class="comment">//			</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line"><span class="comment">//		</span></span><br><span class="line"><span class="comment">//		return new MyComparable();</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//方式二：</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Comparable()&#123;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<blockquote>
+<p>​    <strong>注意点：在一个方法中有局部变量是，也有局部内部类，如果这个局部内部类想用方法中的局部变量，可以直接用（其实这个变量是final的，jdk8及以后省略了，以前的必须要显示声明）。</strong></p>
+</blockquote>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/27/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          java多线程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/23/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="java基础之面向对象（三大特征：封装性，继承性、多态）" data-title="java基础之面向对象（三大特征：封装性，继承性、多态）" data-url="http://example.com/2020/09/23/java%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81%EF%BC%9A%E5%B0%81%E8%A3%85%E6%80%A7%EF%BC%8C%E7%BB%A7%E6%89%BF%E6%80%A7%E3%80%81%E5%A4%9A%E6%80%81%EF%BC%89/"  data-images="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&amp;fm=26&amp;gp=0.jpg" data-content="java基础之面向对象（三大特征：封装性，继承性、多态）">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 John Doe
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java多线程 | Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java常用类一、String类1、概述：    * String声明为final的，不可被继承     * 实现了Serializable接口：表示字符串可以序列化，实现了Comparable即可欧，表示可以比较大小。     * String内部定义了final char[] value用于存储字符串数据     * 通过直接赋值（字面量方式），此时存储在字符串常量池中。并且字符串常量池中不会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java多线程">
+<meta property="og:url" content="http://example.com/2020/09/28/Java%E5%B8%B8%E7%94%A8%E7%B1%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java常用类一、String类1、概述：    * String声明为final的，不可被继承     * 实现了Serializable接口：表示字符串可以序列化，实现了Comparable即可欧，表示可以比较大小。     * String内部定义了final char[] value用于存储字符串数据     * 通过直接赋值（字面量方式），此时存储在字符串常量池中。并且字符串常量池中不会">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:/Users/HUAWEI/AppData/Roaming/Typora/typora-user-images/image-20200927085108940.png">
+<meta property="og:image" content="c:/Users/HUAWEI/AppData/Roaming/Typora/typora-user-images/image-20200927085659401.png">
+<meta property="article:published_time" content="2020-09-28T13:31:03.000Z">
+<meta property="article:modified_time" content="2020-09-28T01:47:17.205Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/HUAWEI/AppData/Roaming/Typora/typora-user-images/image-20200927085108940.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&fm=26&gp=0.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("your_app_id", "your_app_key");</script>
+
+<script src="/js/Counter.js"></script>
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&amp;fm=26&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">橘子荔枝蜜</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">你好，兄dei</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">橘子荔枝蜜</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&amp;fm=26&amp;gp=0.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">橘子荔枝蜜</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">你好，兄dei</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Java常用类" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/28/Java%E5%B8%B8%E7%94%A8%E7%B1%BB/" class="article-date">
+  	<time datetime="2020-09-28T13:31:03.000Z" itemprop="datePublished">2020-09-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java多线程
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2020/09/28/Java%E5%B8%B8%E7%94%A8%E7%B1%BB/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="java多线程">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java常用类"><a href="#Java常用类" class="headerlink" title="Java常用类"></a>Java常用类</h1><h2 id="一、String类"><a href="#一、String类" class="headerlink" title="一、String类"></a>一、String类</h2><h3 id="1、概述："><a href="#1、概述：" class="headerlink" title="1、概述："></a>1、概述：</h3><pre><code>    * String声明为final的，不可被继承
+    * 实现了Serializable接口：表示字符串可以序列化，实现了Comparable即可欧，表示可以比较大小。
+    * String内部定义了final char[] value用于存储字符串数据
+    * 通过直接赋值（字面量方式），此时存储在字符串常量池中。并且字符串常量池中不会存储相同的内容。</code></pre>
+<h3 id="2、String-的不可变性（相同的内容只有一个对象）"><a href="#2、String-的不可变性（相同的内容只有一个对象）" class="headerlink" title="2、String 的不可变性（相同的内容只有一个对象）"></a>2、String 的不可变性（相同的内容只有一个对象）</h3><h5 id="2-1-说明："><a href="#2-1-说明：" class="headerlink" title="2.1 说明："></a>2.1 说明：</h5><p>​            1、当对字符串重新赋值，进行连接操作时，需要重写指定内容区域赋，不能使用原有的value进行赋值</p>
+<p>​            2、当调用String的replace（）方法修改指定字符或字符串时，需要重写指定内容区域赋值，不能使用原有的value进行赋值。</p>
+<p>​            代码举例：</p>
+<p>​    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;abc&quot;</span>;<span class="comment">//字面量的定义方式</span></span><br><span class="line">String s2 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">s1 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(s1 == s2);<span class="comment">//比较s1和s2的地址值 false</span></span><br><span class="line"></span><br><span class="line">System.out.println(s1);<span class="comment">//hello</span></span><br><span class="line">System.out.println(s2);<span class="comment">//abc</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;*****************&quot;</span>);</span><br><span class="line"></span><br><span class="line">String s3 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">s3 += <span class="string">&quot;def&quot;</span>;<span class="comment">//这里创建了一个新的对象“abcdef”，s3指向这个地址</span></span><br><span class="line">System.out.println(s3);<span class="comment">//abcdef</span></span><br><span class="line">System.out.println(s2);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;*****************&quot;</span>);</span><br><span class="line"></span><br><span class="line">String s4 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">String s5 = s4.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;m&#x27;</span>);<span class="comment">//这里创建了一个新的对象“amc”，s5指向这个区域。</span></span><br><span class="line">System.out.println(s4);<span class="comment">//abc</span></span><br><span class="line">System.out.println(s5);<span class="comment">//mbc</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3图示："><a href="#2-3图示：" class="headerlink" title="2.3图示："></a>2.3图示：</h4><p><img src="C:\Users\HUAWEI\AppData\Roaming\Typora\typora-user-images\image-20200927085108940.png" alt="image-20200927085108940"></p>
+<h3 id="3、String实例化的不同方式"><a href="#3、String实例化的不同方式" class="headerlink" title="3、String实例化的不同方式"></a>3、String实例化的不同方式</h3><h4 id="3-1-方式说明"><a href="#3-1-方式说明" class="headerlink" title="3.1 方式说明"></a>3.1 方式说明</h4><pre><code>    * 通过字面量的方式
+    * 通过new的方式</code></pre>
+<h4 id="3-2代码举例"><a href="#3-2代码举例" class="headerlink" title="3.2代码举例"></a>3.2代码举例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过字面量定义的方式：此时的s1和s2的数据javaEE声明在方法区中的字符串常量池中。</span></span><br><span class="line">String s1 = <span class="string">&quot;javaEE&quot;</span>;</span><br><span class="line">String s2 = <span class="string">&quot;javaEE&quot;</span>;</span><br><span class="line"><span class="comment">//通过new + 构造器的方式:此时的s3和s4保存的地址值，是数据在堆空间中开辟空间以后对应的地址值。</span></span><br><span class="line">String s3 = <span class="keyword">new</span> String(<span class="string">&quot;javaEE&quot;</span>);</span><br><span class="line">String s4 = <span class="keyword">new</span> String(<span class="string">&quot;javaEE&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(s1 == s2);<span class="comment">//true</span></span><br><span class="line">System.out.println(s1 == s3);<span class="comment">//false</span></span><br><span class="line">System.out.println(s1 == s4);<span class="comment">//false</span></span><br><span class="line">System.out.println(s3 == s4);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3面试题"><a href="#3-3面试题" class="headerlink" title="3.3面试题"></a>3.3面试题</h3><p>String s = new String(“abc”);创建对象，在内存中创建了几个对象？</p>
+<p>两个：一个是堆空间的new结构，另一个是char[]对应的常量池的数据：“abc”.</p>
+<p>图示：</p>
+<p><img src="C:\Users\HUAWEI\AppData\Roaming\Typora\typora-user-images\image-20200927085659401.png" alt="image-20200927085659401"></p>
+<ol start="4">
+<li><h3 id="字符串拼接方式赋值的对比"><a href="#字符串拼接方式赋值的对比" class="headerlink" title="字符串拼接方式赋值的对比"></a>字符串拼接方式赋值的对比</h3><h4 id="4-1-说明"><a href="#4-1-说明" class="headerlink" title="4.1 说明"></a>4.1 说明</h4><pre><code>* 常量与常量的拼接结果在常量池。且常量池中不会存在相同内容的常量。
+* 只要其中一个是变量，结果就存在堆中。
+* 如果凭借的结果吊用intern（）方法，返回值就在常量池中。</code></pre>
+<h4 id="4-2代码举例"><a href="#4-2代码举例" class="headerlink" title="4.2代码举例"></a>4.2代码举例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;javaEE&quot;</span>;</span><br><span class="line">String s2 = <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line"></span><br><span class="line">String s3 = <span class="string">&quot;javaEEhadoop&quot;</span>;</span><br><span class="line">String s4 = <span class="string">&quot;javaEE&quot;</span> + <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">String s5 = s1 + <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">String s6 = <span class="string">&quot;javaEE&quot;</span> + s2;</span><br><span class="line">String s7 = s1 + s2;</span><br><span class="line"></span><br><span class="line">System.out.println(s3 == s4);<span class="comment">//true</span></span><br><span class="line">System.out.println(s3 == s5);<span class="comment">//false</span></span><br><span class="line">System.out.println(s3 == s6);<span class="comment">//false</span></span><br><span class="line">System.out.println(s3 == s7);<span class="comment">//false</span></span><br><span class="line">System.out.println(s5 == s6);<span class="comment">//false</span></span><br><span class="line">System.out.println(s5 == s7);<span class="comment">//false</span></span><br><span class="line">System.out.println(s6 == s7);<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">String s8 = s6.intern();<span class="comment">//返回值得到的s8使用的常量值中已经存在的“javaEEhadoop”</span></span><br><span class="line">System.out.println(s3 == s8);<span class="comment">//true</span></span><br><span class="line">****************************</span><br><span class="line">String s1 = <span class="string">&quot;javaEEhadoop&quot;</span>;</span><br><span class="line">String s2 = <span class="string">&quot;javaEE&quot;</span>;</span><br><span class="line">String s3 = s2 + <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">System.out.println(s1 == s3);<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> String s4 = <span class="string">&quot;javaEE&quot;</span>;<span class="comment">//s4:常量</span></span><br><span class="line">String s5 = s4 + <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">System.out.println(s1 == s5);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-String与StringBuffer、StringBuilder之间的转换"><a href="#5-String与StringBuffer、StringBuilder之间的转换" class="headerlink" title="5.String与StringBuffer、StringBuilder之间的转换"></a>5.String与StringBuffer、StringBuilder之间的转换</h3><ul>
+<li>String –&gt;StringBuffer、StringBuilder:调用StringBuffer、StringBuilder构造器</li>
+<li>StringBuffer、StringBuilder –&gt;String:①调用String构造器；②StringBuffer、StringBuilder的toString()</li>
+</ul>
+<h3 id="6-jvm中字符串常量池存储的位置"><a href="#6-jvm中字符串常量池存储的位置" class="headerlink" title="6 jvm中字符串常量池存储的位置"></a>6 jvm中字符串常量池存储的位置</h3><pre><code>* jdk 1.6 (jdk 6.0 ,java 6.0):字符串常量池存储在方法区（永久区）
+* jdk 1.7:字符串常量池存储在堆空间
+* jdk 1.8:字符串常量池存储在方法区（元空间）</code></pre>
+<h2 id="二、String，StringBuffer、StringBuilder三个类"><a href="#二、String，StringBuffer、StringBuilder三个类" class="headerlink" title="二、String，StringBuffer、StringBuilder三个类"></a>二、String，StringBuffer、StringBuilder三个类</h2><h3 id="1、三者对比"><a href="#1、三者对比" class="headerlink" title="1、三者对比"></a>1、三者对比</h3><pre><code>* String 不可变的字符序列，底层使用char[]存储
+* StringBuffer：可变的字符序列；线程安全的，效率低；底层使用char[] 存储
+* StringBuilder：可变的字符序列；线程不安全，效率高，底层使用char[]存储</code></pre>
+<h3 id="2、StringBuilder与StringBuffer的内存解析"><a href="#2、StringBuilder与StringBuffer的内存解析" class="headerlink" title="2、StringBuilder与StringBuffer的内存解析"></a>2、StringBuilder与StringBuffer的内存解析</h3><p>​    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">以StringBuffer为例，StringBuilder也一样</span><br><span class="line"></span><br><span class="line">String str = <span class="keyword">new</span> String();<span class="comment">//char[] value = new char[0];</span></span><br><span class="line">String str1 = <span class="keyword">new</span> String(<span class="string">&quot;abc&quot;</span>);<span class="comment">//char[] value = new char[]&#123;&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;&#125;;</span></span><br><span class="line"></span><br><span class="line">StringBuffer sb1 = <span class="keyword">new</span> StringBuffer();<span class="comment">//char[] value = new char[16];底层创建了一个长度是16的数组。</span></span><br><span class="line">System.out.println(sb1.length());<span class="comment">//</span></span><br><span class="line">sb1.append(<span class="string">&#x27;a&#x27;</span>);<span class="comment">//value[0] = &#x27;a&#x27;;</span></span><br><span class="line">sb1.append(<span class="string">&#x27;b&#x27;</span>);<span class="comment">//value[1] = &#x27;b&#x27;;</span></span><br><span class="line"></span><br><span class="line">StringBuffer sb2 = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;abc&quot;</span>);<span class="comment">//char[] value = new char[&quot;abc&quot;.length() + 16];</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//问题1. System.out.println(sb2.length());//3</span></span><br><span class="line"><span class="comment">//问题2. 扩容问题:如果要添加的数据底层数组盛不下了，那就需要扩容底层的数组。</span></span><br><span class="line">         默认情况下，扩容为原来容量的<span class="number">2</span>倍 + <span class="number">2</span>，同时将原数组中的元素复制到新的数组中。</span><br><span class="line"></span><br><span class="line">        指导意义：开发中建议大家使用：StringBuffer(<span class="keyword">int</span> capacity) 或 StringBuilder(<span class="keyword">int</span> capacity)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、StringBuilder、Stringbuffer中的常用方法增：append-xxx"><a href="#3、StringBuilder、Stringbuffer中的常用方法增：append-xxx" class="headerlink" title="3、StringBuilder、Stringbuffer中的常用方法增：append(xxx)"></a>3、StringBuilder、Stringbuffer中的常用方法增：append(xxx)</h3><p>删：delete(int start,int end)<br>改：setCharAt(int n ,char ch) / replace(int start, int end, String str)<br>查：charAt(int n )<br>插：insert(int offset, xxx)<br>长度：length();</p>
+</li>
+</ol>
+<p>*遍历：for() + charAt() / toString()</p>
+<p>   ​    </p>
+<h2 id="三、java比较器"><a href="#三、java比较器" class="headerlink" title="三、java比较器"></a>三、java比较器</h2><p>1.Java比较器的使用背景：</p>
+<p>Java中的对象，正常情况下，只能进行比较：==  或  != 。不能使用 &gt; 或 &lt; 的<br>但是在开发场景中，我们需要对多个对象进行排序，言外之意，就需要比较对象的大小。<br>如何实现？使用两个接口中的任何一个：Comparable 或 Comparator</p>
+<p>2.自然排序：使用Comparable接口<br>2.1 说明<br>1.像String、包装类等实现了Comparable接口，重写了compareTo(obj)方法，给出了比较两个对象大小的方式。<br>2.像String、包装类重写compareTo()方法以后，进行了从小到大的排列<br>3. 重写compareTo(obj)的规则：<br>    如果当前对象this大于形参对象obj，则返回正整数，<br>    如果当前对象this小于形参对象obj，则返回负整数，<br>    如果当前对象this等于形参对象obj，则返回零。<br>4. 对于自定义类来说，如果需要排序，我们可以让自定义类实现Comparable接口，重写compareTo(obj)方法。在compareTo(obj)方法中指明如何排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Goods</span> <span class="keyword">implements</span>  <span class="title">Comparable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> price;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//指明商品比较大小的方式:照价格从低到高排序,再照产品名称从高到低排序</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        System.out.println(&quot;**************&quot;);</span></span><br><span class="line">        <span class="keyword">if</span>(o <span class="keyword">instanceof</span> Goods)&#123;</span><br><span class="line">            Goods goods = (Goods)o;</span><br><span class="line">            <span class="comment">//方式一：</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.price &gt; goods.price)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.price &lt; goods.price)&#123;</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">//                return 0;</span></span><br><span class="line">               <span class="keyword">return</span> -<span class="keyword">this</span>.name.compareTo(goods.name);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//方式二：</span></span><br><span class="line"><span class="comment">//           return Double.compare(this.price,goods.price);</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        return 0;</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;传入的数据类型不一致！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// getter、setter、toString()、构造器：省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.定制排序：使用Comparator接口</p>
+<p>3.1 说明<br>1.背景：<br>当元素的类型没实现java.lang.Comparable接口而又不方便修改代码，或者实现了java.lang.Comparable接口的排序规则不适合当前的操作，那么可以考虑使用 Comparator 的对象来排序<br>2.重写compare(Object o1,Object o2)方法，比较o1和o2的大小：<br>如果方法返回正整数，则表示o1大于o2；<br>如果返回0，表示相等；<br>返回负整数，表示o1小于o2。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Comparator com = <span class="keyword">new</span> Comparator() &#123;</span><br><span class="line">    <span class="comment">//指明商品比较大小的方式:照产品名称从低到高排序,再照价格从高到低排序</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Object o1, Object o2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(o1 <span class="keyword">instanceof</span> Goods &amp;&amp; o2 <span class="keyword">instanceof</span> Goods)&#123;</span><br><span class="line">            Goods g1 = (Goods)o1;</span><br><span class="line">            Goods g2 = (Goods)o2;</span><br><span class="line">            <span class="keyword">if</span>(g1.getName().equals(g2.getName()))&#123;</span><br><span class="line">                <span class="keyword">return</span> -Double.compare(g1.getPrice(),g2.getPrice());</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> g1.getName().compareTo(g2.getName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;输入的数据类型不一致&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用：<br>Arrays.sort(goods,com);<br>Collections.sort(coll,com);<br>new TreeSet(com);</p>
+<ol start="4">
+<li>两种排序方式对比</li>
+</ol>
+<ul>
+<li>Comparable接口的方式一旦一定，保证Comparable接口实现类的对象在任何位置都可以比较大小。</li>
+<li>Comparator接口属于临时性的比较。</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/27/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java多线程</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="Java常用类" data-title="java多线程" data-url="http://example.com/2020/09/28/Java%E5%B8%B8%E7%94%A8%E7%B1%BB/"  data-images="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3618938103,2947328771&amp;fm=26&amp;gp=0.jpg" data-content="java多线程">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 John Doe
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
